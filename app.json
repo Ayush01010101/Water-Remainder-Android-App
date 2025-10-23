@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Water-Remainder",
-    "slug": "Water-Remainder",
+    "name": "waterremainder",
+    "slug": "waterremainder",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
