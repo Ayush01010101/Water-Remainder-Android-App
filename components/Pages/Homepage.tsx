@@ -9,9 +9,7 @@ const Homepage = (): ReactNode => {
     <View className="flex-1 w-screen bg-background">
 
       <Drinkcard />
-
       <ProgressCard />
-
       <QuickLog />
 
     </View >
