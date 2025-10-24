@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import { FontAwesome5, Feather } from "@expo/vector-icons";
+import { Image } from "react-native";
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
 const QuickLog = () => {
@@ -24,7 +24,7 @@ const QuickLog = () => {
         {logOptions.map((option, index) => (
           <TouchableOpacity
             key={index}
-            className="bg-gray-800 rounded-xl p-4 items-center flex-1"
+            className="bg-[#1E1E1E] rounded-xl p-4 items-center flex-1"
             style={{ minHeight: 120 }}
           >
 
@@ -35,7 +35,6 @@ const QuickLog = () => {
 
 
             <View className="pt-5">
-              <FontAwesome6 name="glass-water" size={30} color="#f9f8f9" />
 
             </View>
           </TouchableOpacity>

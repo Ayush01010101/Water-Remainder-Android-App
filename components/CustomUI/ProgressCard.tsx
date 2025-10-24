@@ -14,7 +14,7 @@ const ProgressCard = () => {
   ];
 
   return (
-    <View className="bg-gray-800 rounded-xl p-4 m-4 shadow-md">
+    <View className="bg-[#1B1B1B] rounded-xl p-4 m-4 shadow-md">
 
       <View className="flex-row items-center justify-between mb-4">
         <Text className="text-white text-xl font-bold">

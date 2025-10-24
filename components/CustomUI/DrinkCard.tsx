@@ -1,4 +1,5 @@
 import { View, Text, TouchableOpacity } from "react-native";
+import VibrateTouchEffect from "../HardwareAccessibility/VibrateTouchEffect";
 import { Feather, Ionicons } from "@expo/vector-icons";
 
 const Drinkcard = () => {
@@ -21,7 +22,10 @@ const Drinkcard = () => {
 
         <TouchableOpacity className="bg-white rounded-lg py-3 flex-row items-center justify-center flex-1">
           <Ionicons name="water-outline" size={20} color="#2563eb" />
-          <Text className="text-blue-600 font-bold text-base ml-2">
+          <Text className="text-blue-600 font-bold text-base ml-2" onPress={() => {
+            VibrateTouchEffect()
+            console.log('something happne')
+          }}>
             Drink Now
           </Text>
         </TouchableOpacity>
