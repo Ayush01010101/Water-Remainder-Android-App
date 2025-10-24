@@ -3,7 +3,8 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 import { useEffect } from 'react';
 import AlertPopup from '@/components/CustomUI/AlertPopup';
-import requestNotificationPermission from './Permissions/NotificationPermission';
+import requestNotificationPermission from '@/components/Permissions/NotificationPermission';
+import Homepage from '@/components/Pages/Homepage';
 export default function Screen() {
   useEffect(() => {
     requestNotificationPermission()
@@ -12,10 +13,8 @@ export default function Screen() {
     <>
       <Stack.Screen options={{ headerShown: false }} />
 
-      <View className="flex-1 items-center justify-center bg-background">
+      <Homepage />
 
-        <Text className="text-2xl font-bold text-foreground">Water Remainder App</Text>
-      </View >
     </>
   );
 }
