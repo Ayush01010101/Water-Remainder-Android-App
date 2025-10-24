@@ -21,7 +21,7 @@ const Drinkcard = () => {
   const greeting = getGreeting()
 
   return (
-    <View className="bg-blue-600 rounded-2xl p-8 m-4 shadow-lg">
+    <View className="bg-blue-600 rounded-2xl p-6 m-4 shadow-lg">
 
       <View className="items-center mb-4">
         <Feather name="bell" size={32} color="white" />

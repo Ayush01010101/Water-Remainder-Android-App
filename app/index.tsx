@@ -1,7 +1,6 @@
 import { Stack } from 'expo-router';
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import { useEffect } from 'react';
 import requestNotificationPermission from '@/components/Permissions/NotificationPermission';
 import { UserDataProvider } from '@/components/ContextAPI/UserDataContext';
 import Homepage from '@/components/Pages/Homepage';
