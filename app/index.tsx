@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import AlertPopup from '@/components/CustomUI/AlertPopup';
 import requestNotificationPermission from '@/components/Permissions/NotificationPermission';
 import Homepage from '@/components/Pages/Homepage';
+import Navbar from '@/components/CustomUI/Navbar';
 export default function Screen() {
   useEffect(() => {
     requestNotificationPermission()
@@ -13,6 +14,7 @@ export default function Screen() {
     <>
       <Stack.Screen options={{ headerShown: false }} />
 
+      <Navbar />
       <Homepage />
 
     </>
