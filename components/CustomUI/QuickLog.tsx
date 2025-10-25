@@ -1,14 +1,12 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import { Image } from "react-native";
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
-
 const QuickLog = () => {
 
   // Quick log data
   const logOptions = [
-    { icon: "glass-whiskey", size: 28, text: "250ml", iconPack: "FontAwesome5" },
-    { icon: "coffee", size: 28, text: "500ml", iconPack: "Feather" },
-    { icon: "bottle-water", size: 28, text: "750ml", iconPack: "FontAwesome5" },
+    { size: 28, text: "+ 1 Glass", },
+    { size: 28, text: "+ 2 Glass", },
+    { size: 28, text: "+ 3 Glass", },
   ];
 
 
@@ -28,11 +26,15 @@ const QuickLog = () => {
             style={{ minHeight: 120 }}
           >
 
-
             <Text className="text-gray-300 text-base font-semibold">
               {option.text}
             </Text>
 
+            <View className="mt-4">
+
+
+              <FontAwesome6 name="martini-glass-empty" size={24} color="white" />
+            </View>
 
             <View className="pt-5">
 

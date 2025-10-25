@@ -4,6 +4,7 @@ import { Text } from "react-native";
 import Drinkcard from "../CustomUI/DrinkCard";
 import QuickLog from "../CustomUI/QuickLog";
 import ProgressCard from "../CustomUI/ProgressCard";
+import { Vibration } from 'react-native';
 import NotificationDeniedInfo from "../CustomUI/NotificaitonDeniedInfo";
 import { useEffect } from "react";
 import requestNotificationPermission from "../Permissions/NotificationPermission";
@@ -22,6 +23,8 @@ const Homepage = (): ReactNode => {
 
   }, [])
 
+  const RING_PATTERN = [1000, 1000, 1000, 1000];
+
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -31,10 +34,7 @@ const Homepage = (): ReactNode => {
         <Drinkcard />
         <ProgressCard />
         <QuickLog />
-        <View className="h-screen w-screen">
 
-          <Text className="text-4xl text-white">Hello wold</Text>
-        </View>
       </View >
     </ScrollView>
 
