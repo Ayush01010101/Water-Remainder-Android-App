@@ -1,8 +1,17 @@
 import { FC, useContext, useState } from "react";
 import { createContext, ReactNode } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 interface UserDataType {
+
   Username: string;
+  Target: {
+    Glass: number | undefined;
+    Liter: number | undefined;
+  };
   Streak: number
+  Functions: {
+    LoginHandle: (username: string, target: UserDataType['Target']) => void
+  }
 }
 
 
@@ -13,11 +22,28 @@ const UserDataProvider: FC<{ children: ReactNode }> = ({ children }): ReactNode 
 
   const [Username, setUsername] = useState<string>("")
   const [Streak, setStreak] = useState<number>(0)
-  return (
-    <>
-      <UserDataContext.Provider value={{ Username, Streak }}>
-        {children}
+  const [Target, seTarget] = useState<UserDataType["Target"]>({ Glass: undefined, Liter: undefined })
 
+  const LoginHandle = async (username: string, target: UserDataType['Target']) => {
+    if (!username || !target) {
+      throw new Error("Please enter usernamd and target")
+    }
+    const data = {
+      name: username,
+      Target: target
+
+    }
+
+
+    setUsername(username)
+
+
+  }
+  return (
+
+    <>
+      <UserDataContext.Provider value={{ Username, Streak, Target: Target, Functions: { LoginHandle: LoginHandle } }}>
+        {children}
       </UserDataContext.Provider>
 
     </>
