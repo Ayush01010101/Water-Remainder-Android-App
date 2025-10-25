@@ -1,3 +1,4 @@
+import { UserDataProvider } from '@/components/ContextAPI/UserDataContext';
 import '@/global.css';
 import { NAV_THEME } from '@/lib/theme';
 import { ThemeProvider } from '@react-navigation/native';
@@ -16,9 +17,13 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={NAV_THEME[colorScheme ?? 'light']}>
-      <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
-      <Stack />
-      <PortalHost />
+      <UserDataProvider>
+
+        <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+        <Stack />
+        <PortalHost />
+      </UserDataProvider>
+
     </ThemeProvider>
   );
 }

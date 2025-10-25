@@ -7,10 +7,10 @@ const ProgressCard = () => {
   const progressPercentage = (drankGlasses / totalGlasses) * 100;
 
   const timeSlots = [
-    { time: "8 AM", drank: true },
-    { time: "10 AM", drank: true },
-    { time: "12 PM", drank: true },
-    { time: "2 PM", drank: false }, // Yeh abhi tak nahi piya
+    { time: "8 AM", drank: false },
+    { time: "10 AM", drank: false },
+    { time: "12 PM", drank: false },
+    { time: "2 PM", drank: false },
   ];
 
   return (
@@ -21,19 +21,19 @@ const ProgressCard = () => {
           Today's Progress
         </Text>
         <Text className="text-gray-300 text-lg font-semibold">
-          {drankGlasses} / {totalGlasses} glasses
+          0 glasses
         </Text>
       </View>
 
       <View className="w-full bg-gray-700 rounded-full h-2 mb-2">
         <View
-          className="bg-blue-600 rounded-full h-2"
-          style={{ width: `${progressPercentage}%` }}
+          className="bg-blue-600 w-0 rounded-full h-2"
+
         />
       </View>
 
       <Text className="text-blue-400 text-sm mb-6">
-        {progressPercentage}% Complete
+        0% Complete
       </Text>
 
       <View className="flex-row justify-around items-center">
