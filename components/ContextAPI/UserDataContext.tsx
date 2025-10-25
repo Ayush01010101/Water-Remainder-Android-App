@@ -1,59 +1,101 @@
-import { FC, useContext, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState, useCallback, useMemo } from "react";
 import { useRouter } from "expo-router";
 import { createContext, ReactNode } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export interface UserDataType {
   Username: string;
   Target: {
     Glass: number | undefined;
   };
-  Streak: number
+  Streak: number;
+  isLoading: boolean;
   Functions: {
-    LoginHandle: (username: string, target: UserDataType['Target']) => void
+    LoginHandle: (username: string, target: UserDataType['Target']) => Promise<void>;
+    LogoutHandle: () => Promise<void>;
   }
 }
 
 const UserDataContext = createContext<null | UserDataType>(null)
 const UserDataProvider: FC<{ children: ReactNode }> = ({ children }): ReactNode => {
 
-  useEffect(() => {
-    AsyncStorage.getItem("UserData").then((data) => {
-      if (data) {
-        setUsername(JSON.parse(data).Username)
-      }
-    })
-  }, [])
-
-
-
   const Router = useRouter()
   const [Username, setUsername] = useState<string>("")
   const [Streak, setStreak] = useState<number>(0)
-  const [Target, seTarget] = useState<UserDataType["Target"]>({ Glass: undefined })
+  const [Target, setTarget] = useState<UserDataType["Target"]>({ Glass: undefined })
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
-  const LoginHandle = async (username: string, target: UserDataType['Target']) => {
-    if (!username || !target) {
-      throw new Error("Please enter usernamd and target")
+  useEffect(() => {
+    loadUserData();
+  }, [])
+
+  const loadUserData = useCallback(async () => {
+    try {
+      const data = await AsyncStorage.getItem("UserData");
+      
+      if (data) {
+        const parsedData = JSON.parse(data);
+        setUsername(parsedData.name || parsedData.Username || "");
+        setTarget(parsedData.Target || { Glass: undefined });
+        setStreak(parsedData.Streak || 0);
+      }
+    } catch (error) {
+      console.error('Error loading user data:', error);
+    } finally {
+      setIsLoading(false);
     }
+  }, []);
+
+  const LoginHandle = useCallback(async (username: string, target: UserDataType['Target']) => {
+    if (!username || !target) {
+      throw new Error("Please enter username and target");
+    }
+    
     const data = {
       name: username,
-      Target: target
+      Username: username,
+      Target: target,
+      Streak: 0
+    };
+
+    try {
+      await AsyncStorage.setItem("UserData", JSON.stringify(data));
+      setUsername(username);
+      setTarget(target);
+      setStreak(0);
+      Router.replace('/');
+    } catch (error) {
+      console.error('Error saving user data:', error);
+      throw error;
     }
+  }, [Router]);
 
-    await AsyncStorage.setItem("UserData", JSON.stringify(data)).then(() => {
-      Router.navigate('/')
-      setUsername(username)
-    })
+  const LogoutHandle = useCallback(async () => {
+    try {
+      await AsyncStorage.removeItem("UserData");
+      setUsername("");
+      setTarget({ Glass: undefined });
+      setStreak(0);
+      Router.replace('/login');
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  }, [Router]);
+  const contextValue = useMemo(() => ({
+    Username, 
+    Streak, 
+    Target, 
+    isLoading, 
+    Functions: { 
+      LoginHandle, 
+      LogoutHandle 
+    } 
+  }), [Username, Streak, Target, isLoading, LoginHandle, LogoutHandle]);
 
-  }
   return (
-
-    <>
-      <UserDataContext.Provider value={{ Username, Streak, Target: Target, Functions: { LoginHandle: LoginHandle } }}>
-        {children}
-      </UserDataContext.Provider>
-
-    </>
+    <UserDataContext.Provider value={contextValue}>
+      {children}
+    </UserDataContext.Provider>
   )
 
 }

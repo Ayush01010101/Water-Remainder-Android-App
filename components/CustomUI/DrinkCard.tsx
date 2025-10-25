@@ -46,11 +46,6 @@ const Drinkcard = () => {
             Drink Now
           </Text>
         </TouchableOpacity>
-
-        <TouchableOpacity className="border border-blue-400 rounded-lg p-3">
-          <Feather name="clock" size={24} color="white" />
-        </TouchableOpacity>
-
       </View>
     </View >
   );

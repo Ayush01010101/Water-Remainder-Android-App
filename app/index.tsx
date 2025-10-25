@@ -1,11 +1,16 @@
 import { Stack } from 'expo-router';
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import requestNotificationPermission from '@/components/Permissions/NotificationPermission';
-import { UserDataProvider } from '@/components/ContextAPI/UserDataContext';
+import React from 'react';
+import { useAuth } from '@/hooks/useAuth';
+import LoadingScreen from '@/components/CustomUI/LoadingScreen';
 import Homepage from '@/components/Pages/Homepage';
 import Navbar from '@/components/CustomUI/Navbar';
+
 export default function Screen() {
+  const { isLoading, isAuthenticated } = useAuth();
+
+  if (isLoading || !isAuthenticated) {
+    return <LoadingScreen />;
+  }
 
   return (
     <>

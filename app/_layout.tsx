@@ -18,12 +18,10 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={NAV_THEME[colorScheme ?? 'light']}>
       <UserDataProvider>
-
         <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
         <Stack />
         <PortalHost />
       </UserDataProvider>
-
     </ThemeProvider>
   );
 }
