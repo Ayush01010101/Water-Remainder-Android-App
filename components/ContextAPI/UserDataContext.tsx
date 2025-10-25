@@ -1,12 +1,11 @@
-import { FC, useContext, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
+import { useRouter } from "expo-router";
 import { createContext, ReactNode } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-interface UserDataType {
-
+export interface UserDataType {
   Username: string;
   Target: {
     Glass: number | undefined;
-    Liter: number | undefined;
   };
   Streak: number
   Functions: {
@@ -14,15 +13,23 @@ interface UserDataType {
   }
 }
 
-
 const UserDataContext = createContext<null | UserDataType>(null)
-
-//provider of createContext
 const UserDataProvider: FC<{ children: ReactNode }> = ({ children }): ReactNode => {
 
+  useEffect(() => {
+    AsyncStorage.getItem("UserData").then((data) => {
+      if (data) {
+        setUsername(JSON.parse(data).Username)
+      }
+    })
+  }, [])
+
+
+
+  const Router = useRouter()
   const [Username, setUsername] = useState<string>("")
   const [Streak, setStreak] = useState<number>(0)
-  const [Target, seTarget] = useState<UserDataType["Target"]>({ Glass: undefined, Liter: undefined })
+  const [Target, seTarget] = useState<UserDataType["Target"]>({ Glass: undefined })
 
   const LoginHandle = async (username: string, target: UserDataType['Target']) => {
     if (!username || !target) {
@@ -31,12 +38,12 @@ const UserDataProvider: FC<{ children: ReactNode }> = ({ children }): ReactNode 
     const data = {
       name: username,
       Target: target
-
     }
 
-
-    setUsername(username)
-
+    await AsyncStorage.setItem("UserData", JSON.stringify(data)).then(() => {
+      Router.navigate('/')
+      setUsername(username)
+    })
 
   }
   return (

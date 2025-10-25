@@ -10,11 +10,8 @@ export default function Screen() {
   return (
     <>
       <Stack.Screen options={{ headerShown: false }} />
-
-
       <Navbar />
       <Homepage />
-
     </>
   );
 }

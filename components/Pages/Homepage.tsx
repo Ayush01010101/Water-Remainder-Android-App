@@ -9,16 +9,20 @@ import { useEffect } from "react";
 import requestNotificationPermission from "../Permissions/NotificationPermission";
 const Homepage = (): ReactNode => {
   const [NotificationAllow, setNotificationAllow] = useState<boolean>(true)
+  const [Loading, setLoading] = useState<boolean>(true)
   useEffect(() => {
-    requestNotificationPermission().then((data) => {
+    requestNotificationPermission().then(async (data) => {
       if (!data) {
         setNotificationAllow(false)
       } else {
         setNotificationAllow(true)
       }
-
     })
+
+
   }, [])
+
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
 
@@ -27,7 +31,6 @@ const Homepage = (): ReactNode => {
         <Drinkcard />
         <ProgressCard />
         <QuickLog />
-
         <View className="h-screen w-screen">
 
           <Text className="text-4xl text-white">Hello wold</Text>
