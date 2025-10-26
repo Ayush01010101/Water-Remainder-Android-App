@@ -23,7 +23,7 @@ const Loginpage = (): ReactNode => {
 
     if (handleLogin) {
       if (goal) {
-        handleLogin(username, { Glass: parseInt(goal) });
+        handleLogin(username, { Glass: parseInt(goal), Completed: 0 });
       }
 
     } else {

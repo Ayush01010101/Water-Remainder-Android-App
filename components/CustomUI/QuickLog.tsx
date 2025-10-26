@@ -1,5 +1,6 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import { Image } from "react-native";
+
 const QuickLog = () => {
 
   // Quick log data
@@ -32,8 +33,7 @@ const QuickLog = () => {
 
             <View className="mt-4">
 
-
-              <FontAwesome6 name="martini-glass-empty" size={24} color="white" />
+              <Image src="/assets/images/water-glass.svg" className="w-10 h-10" />
             </View>
 
             <View className="pt-5">

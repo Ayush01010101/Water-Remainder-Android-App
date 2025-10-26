@@ -2,6 +2,8 @@ import { View, Text, TouchableOpacity } from "react-native";
 import VibrateTouchEffect from "../HardwareAccessibility/VibrateTouchEffect";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import { Image } from "react-native";
+import { useGetUserData } from "../ContextAPI/UserDataContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const getGreeting = () => {
   const now = new Date();
   const hour = now.getHours();
@@ -20,6 +22,7 @@ const getGreeting = () => {
 const Drinkcard = () => {
   const greeting = getGreeting()
 
+  const ContextFunctions = useGetUserData()?.Functions
   return (
     <View className="bg-blue-600 rounded-2xl p-6 m-4 shadow-lg">
 
@@ -37,12 +40,14 @@ const Drinkcard = () => {
 
       <View className="flex-row  w-full gap-3  space-x-4">
 
-        <TouchableOpacity className="bg-white rounded-lg py-3 flex-row items-center justify-center flex-1">
+        <TouchableOpacity className="bg-white rounded-lg py-3 flex-row items-center justify-center flex-1 " onPress={() => {
+          ContextFunctions?.DrinkGlass().then(() => {
+            AsyncStorage.getItem('UserData').then(data => console.log(data))
+          })
+          console.log('hello world')
+        }}>
           <Ionicons name="water-outline" size={20} color="#2563eb" />
-          <Text className="text-blue-600 font-bold text-base ml-2" onPress={() => {
-            VibrateTouchEffect()
-            console.log('something happne')
-          }}>
+          <Text className="text-blue-600 font-bold text-base ml-2" >
             Drink Now
           </Text>
         </TouchableOpacity>

@@ -10,11 +10,20 @@
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#007ad2"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
+
+    "notification": {
+      "iosDisplayInForeground": true,
+      "androidMode": "default",
+      "android": {
+        "sound": "./assets/sounds/Ring.mp3"
+      }
+    },
+
     "ios": {
       "supportsTablet": true
     },
@@ -22,7 +31,7 @@
       "edgeToEdgeEnabled": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#007ad2"
       },
       "package": "com.ayush01010101.WaterRemainder"
     },
