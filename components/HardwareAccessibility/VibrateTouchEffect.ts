@@ -1,6 +1,5 @@
 const VibrateTouchEffect = () => {
-  //add logic for vibreation
-  console.log('vibrate')
+  //use haptics library from expo-haptics
 }
 
 export default VibrateTouchEffect

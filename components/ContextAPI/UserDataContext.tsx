@@ -35,7 +35,6 @@ const UserDataProvider: FC<{ children: ReactNode }> = ({ children }): ReactNode 
   const loadUserData = useCallback(async () => {
     try {
       const data = await AsyncStorage.getItem("UserData");
-      console.log(data)
       if (data) {
         const parsedData = JSON.parse(data);
         setUsername(parsedData.Username || "");
@@ -43,7 +42,6 @@ const UserDataProvider: FC<{ children: ReactNode }> = ({ children }): ReactNode 
         setStreak(parsedData.Streak || 0);
       }
     } catch (error) {
-      console.error('Error loading user data:', error);
     } finally {
       setIsLoading(false);
     }

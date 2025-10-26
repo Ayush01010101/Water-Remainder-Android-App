@@ -3,7 +3,6 @@ import { Image } from "react-native";
 
 const QuickLog = () => {
 
-  // Quick log data
   const logOptions = [
     { size: 28, text: "+ 1 Glass", },
     { size: 28, text: "+ 2 Glass", },

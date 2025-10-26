@@ -45,7 +45,6 @@ export const useAuth = () => {
       });
 
     } catch (error) {
-      console.error('Auth error:', error);
       router.replace('/login');
     }
   }, [router]);
