@@ -1,4 +1,3 @@
-
 import { FC, useContext, useEffect, useState, useCallback, useMemo } from "react";
 import { useRouter } from "expo-router";
 import { createContext, ReactNode } from "react";
@@ -77,7 +76,7 @@ const UserDataProvider: FC<{ children: ReactNode }> = ({ children }): ReactNode 
       setReminderInterval(null);
       Router.replace('/');
     } catch (error) { console.error('Error saving user data:', error); throw error; }
-  }, [Router, setUsername, setTarget, setStreak, setReminderInterval, saveDataToStorage]); // saveDataToStorage added
+  }, [Router, setUsername, setTarget, setStreak, setReminderInterval, saveDataToStorage]);
 
   const LogoutHandle = useCallback(async () => {
     try {
@@ -103,7 +102,6 @@ const UserDataProvider: FC<{ children: ReactNode }> = ({ children }): ReactNode 
         return currentCompleted;
       }
 
-      // Check karo ki goal pehle se poora hai ya nahi (yahan change kiya)
       if (currentCompleted >= currentGoal) {
         Alert.alert("Goal Already Reached", "You have already completed your daily goal!");
         return currentCompleted;
@@ -112,19 +110,13 @@ const UserDataProvider: FC<{ children: ReactNode }> = ({ children }): ReactNode 
       const newCompleted = currentCompleted + amount;
       let finalCompleted = newCompleted;
 
-      // Agar goal complete ho gaya ya cross ho gaya
       if (newCompleted >= currentGoal) {
-        finalCompleted = currentGoal; // Value ko goal par cap karo
-
-        // Sirf tabhi alert dikhao aur stop karo jab pehle goal complete nahi tha
+        finalCompleted = currentGoal;
         if (currentCompleted < currentGoal) {
           Alert.alert("Goal Complete!", "Congratulations, you've reached your daily goal! Reminders stopped.");
-
-          // --- YEH HAI NAYA CODE ---
-          await stopReminderLoop(); // Notification loop ko band karo
-          setReminderInterval(null); // State update karo
-          await saveDataToStorage({ reminderInterval: null }); // Storage update karo
-          // --- NAYA CODE KHATAM ---
+          await stopReminderLoop();
+          setReminderInterval(null);
+          await saveDataToStorage({ reminderInterval: null });
         }
       }
 
@@ -133,14 +125,14 @@ const UserDataProvider: FC<{ children: ReactNode }> = ({ children }): ReactNode 
       setTarget(newData.Target);
       return finalCompleted;
     } return undefined;
-  }, [setTarget, saveDataToStorage, setReminderInterval]); // Dependencies update ki
+  }, [setTarget, saveDataToStorage, setReminderInterval]);
 
   const UpdateGoal = useCallback(async (amountToAdd: number): Promise<number | undefined> => {
     const userdata = await AsyncStorage.getItem('UserData');
     if (userdata) {
       const previousData: UserDataType = JSON.parse(userdata);
       const currentGoal = previousData.Target?.Glass || 0;
-      if (currentGoal === 15 && amountToAdd > 0) { Alert.alert("Limit Reached", "You drank 15 glasses of water ."); return 15; }
+      if (currentGoal === 15 && amountToAdd > 0) { Alert.alert("Limit Reached", "15 glasses is limit"); return 15; }
       const potentialNewGoal = currentGoal + amountToAdd;
       let finalNewGoal = potentialNewGoal > 15 ? 15 : potentialNewGoal;
       if (finalNewGoal === 15 && potentialNewGoal > 15) Alert.alert("Limit Reached", "You can only select 15 glasses ");

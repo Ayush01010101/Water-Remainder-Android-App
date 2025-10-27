@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
-import { Text, Alert } from "react-native";
+import { Text, Alert, Keyboard } from "react-native";
 import { Button } from "../ui/button";
 import { View } from "react-native";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "../ui/card";
 import { Input } from "../ui/input";
 import { useState } from "react";
 import { useGetUserData } from "../ContextAPI/UserDataContext";
@@ -58,7 +58,7 @@ const Loginpage = (): ReactNode => {
                   setGoal(value?.value)
 
                 }}>
-                  <SelectTrigger className='w-full '>
+                  <SelectTrigger onPress={() => Keyboard.dismiss()} className='w-full '>
                     <SelectValue
                       className="text-2xl"
                       placeholder='Set Your Goal'
