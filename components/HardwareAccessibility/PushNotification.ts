@@ -5,8 +5,8 @@ export async function setupNotifications() {
   const { status } = await Notifications.requestPermissionsAsync();
   Notifications.setNotificationHandler({
     handleNotification: async () => ({
-      shouldPlaySound: false,
-      shouldSetBadge: false,
+      shouldPlaySound: true,
+      shouldSetBadge: true,
       shouldShowBanner: true,
       shouldShowList: true,
     }),
@@ -32,7 +32,6 @@ export async function setupNotifications() {
 
 export const startReminderLoop = async (minutes: number) => {
   await Notifications.cancelAllScheduledNotificationsAsync();
-
   await Notifications.scheduleNotificationAsync({
     content: {
       title: '💧 Drink Some Water!',
@@ -40,7 +39,7 @@ export const startReminderLoop = async (minutes: number) => {
     },
     trigger: {
       type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
-      seconds: 20000,
+      seconds: minutes * 60,
       repeats: true,
     },
 
@@ -50,5 +49,4 @@ export const startReminderLoop = async (minutes: number) => {
 
 export const stopReminderLoop = async () => {
   await Notifications.cancelAllScheduledNotificationsAsync();
-  console.log('Saare reminders cancel kar diye gaye.');
 };
