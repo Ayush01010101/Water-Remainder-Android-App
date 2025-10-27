@@ -40,7 +40,7 @@ export const startReminderLoop = async (minutes: number) => {
     },
     trigger: {
       type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
-      seconds: 10,
+      seconds: 20000,
       repeats: true,
     },
 

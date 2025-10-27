@@ -4,6 +4,7 @@ import { useGetUserData } from "../ContextAPI/UserDataContext";
 const ProgressCard = () => {
   const userData = useGetUserData();
   const totalGlasses = userData?.Target.Glass ?? 8;
+
   const drankGlasses = userData?.Target.Completed ?? 0;
   const progressPercentage = totalGlasses > 0 ? (drankGlasses / totalGlasses) * 100 : 0;
 
@@ -30,7 +31,7 @@ const ProgressCard = () => {
         {Math.floor(progressPercentage)}% Complete
       </Text>
 
-      <View className="flex-row  flex-wrap gap-y-4">
+      <View className="flex-row items-center justify-center  flex-wrap gap-y-4">
 
         {Array.from({ length: totalGlasses }, (_, index) => {
 

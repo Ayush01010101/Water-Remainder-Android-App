@@ -17,8 +17,6 @@ const Homepage = (): ReactNode => {
         setNotificationAllow(false)
       } else {
         setNotificationAllow(true)
-        setupNotifications();
-        startReminderLoop(1)
       }
     })
 
