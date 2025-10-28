@@ -33,6 +33,10 @@ A simple yet effective React Native application built with Expo to help you trac
 
 ## Getting Started
 
+### Using Docker
+    docker build -t <image_name> .
+    docker run -it -p 8081:8081 <image_name>
+### or
 ### Prerequisites
 
 * Node.js (LTS version recommended)
